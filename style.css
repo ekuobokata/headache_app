@@ -1,0 +1,160 @@
+/* --- 1. 変数・全体設定 --- 
+   何度も使う色やフォントを一括管理します。
+   後で色を変えたいときはここを直すだけで全体に反映 */
+:root {
+    --main-blue: #4da6ff;     
+    --dark-blue: #003366;    
+    --bg-color: #f0f4f8;      
+    --card-bg: #ffffff;       
+    --border-color: #e0e0e0;  
+    --text-color: #333;       
+    --accent-red: #ff7675;    
+}
+
+/* ページ全体の基本設定 */
+body {
+    font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+    margin: 0;
+    padding-top: 100px;       /* 固定ヘッダーに隠れないよう、上に余白を作る */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;      /* コンテンツを中央に寄せる */
+}
+
+/* コンテンツを表示するメインの箱 */
+.container {
+    width: 95%;
+    max-width: 950px;         /* 横に広がりすぎないよう制限 */
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;   /* パディングを含めた幅計算にする */
+}
+
+/* --- 2. 固定ヘッダー --- 
+   画面上部に常に表示されるナビゲーションエリア */
+.header {
+    position: fixed;          /* 画面上部に固定 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 1000;            /* 他の要素より手前に表示 */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* 下側に薄い影 */
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* ヘッダーの中の要素（ロゴとユーザー情報）を両端に配置 */
+.nav-container {
+    width: 100%;
+    max-width: 950px;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between; /* ロゴは左、ログイン情報は右 */
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.site-info h1 { color: var(--dark-blue); margin: 0; font-size: 20px; }
+.site-info p { margin: 0; font-size: 12px; color: #666; }
+
+/* --- 3. フォームとセクション（白いカード風のデザイン） --- */
+.memo-form, .log-table-section {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 8px;       /* 角丸 */
+    margin-bottom: 30px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-color);
+}
+
+/* 入力パーツ（日付、選択、メモ欄）の共通設定 */
+input[type="date"], input[type="number"], select, .memo-textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.memo-textarea { height: 80px; } /* メモ欄の高さを指定 */
+
+/* --- 4. ボタン --- */
+/* 保存ボタン（青） */
+.btn-blue {
+    background-color: var(--main-blue);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+}
+
+/* 編集ボタン（枠線のみ、ホバーで塗りつぶし） */
+.btn-edit {
+    text-decoration: none;
+    color: var(--main-blue);
+    border: 1px solid var(--main-blue);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-right: 5px;
+    transition: 0.3s;
+}
+.btn-edit:hover { background: var(--main-blue); color: white; }
+
+/* 削除ボタン（赤） */
+.btn-delete {
+    text-decoration: none;
+    color: var(--accent-red);
+    border: 1px solid var(--accent-red);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* --- 5. 記録一覧テーブル --- */
+.table-wrapper { 
+    overflow-x: auto;         /* スマホで表がはみ出た場合に横スクロール可能にする */
+    margin-top: 15px; 
+}
+
+.data-view-table { 
+    width: 100%; 
+    border-collapse: collapse; /* 枠線を1本にまとめる */
+    font-size: 14px; 
+    min-width: 850px;         /* 表が潰れないよう最小幅を確保 */
+}
+
+.data-view-table th { 
+    background: #f8f9fa; 
+    padding: 12px; 
+    border: 1px solid #eee; 
+}
+
+.data-view-table td { 
+    padding: 12px; 
+    border: 1px solid #eee; 
+    text-align: center; 
+}
+
+/* 1行おきに背景色を変えて読みやすくする（ゼブラ柄） */
+.data-view-table tr:nth-child(even) td { background-color: #fafcfe; }
+
+/* 生理バッジ */
+.status-badge-red {
+    background: var(--accent-red);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+/* メモ用の左寄せクラス */
+.text-left { text-align: left !important; font-size: 13px; color: #555; }
